@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<component name="datasources-secondrepo-config">
+    <extension target="org.nuxeo.runtime.datasource" point="datasources">
+        <datasource name="jdbc/repository_secondrepo" xaDataSource="org.postgresql.xa.PGXADataSource"
+                    maxPoolSize="100" minPoolSize="5" blockingTimeoutMillis="10000">
+            <property name="ServerName">localhost</property>
+            <property name="PortNumber">5432</property>
+            <property name="DatabaseName">secondrepo</property>
+            <property name="User">nuxeo</property>
+            <property name="Password">password</property>
+        </datasource>
+    </extension>
+</component>

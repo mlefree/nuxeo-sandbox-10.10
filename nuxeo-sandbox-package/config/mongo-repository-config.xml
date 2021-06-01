@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<component name="default-repository-config">
+    <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
+        <blobprovider name="default">
+            <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+            <property name="path">/var/lib/nuxeo/data/binaries</property>
+            <property name="key"></property>
+        </blobprovider>
+    </extension>
+
+    <require>org.nuxeo.runtime.mongodb.MongoDBComponent</require>
+
+    <extension target="org.nuxeo.ecm.core.storage.mongodb.MongoDBRepositoryService"
+               point="repository">
+        <!-- it will lookup for "repository/default" connection -->
+        <repository name="default" label="label.default.repository">
+            <fulltext disabled="false"
+                      storedInBlob="false"
+                      searchDisabled="false" />
+            <cache enabled="true" maxSize="1000"
+                   concurrencyLevel="10" ttl="10" />
+            <clustering id="" enabled="false">
+                <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
+            </clustering>
+            <changeTokenEnabled>true</changeTokenEnabled>
+        </repository>
+    </extension>
+
+
+</component>

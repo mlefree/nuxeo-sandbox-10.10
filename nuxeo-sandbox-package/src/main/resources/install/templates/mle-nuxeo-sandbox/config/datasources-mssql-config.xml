@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.runtime.datasource.server.contrib">
+
+    <extension target="org.nuxeo.runtime.datasource" point="datasources">
+        <datasource name="jdbc/repository_mssql" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                    url="jdbc:sqlserver://mssql:1433;database=nuxeo;selectMethod=cursor"
+                    username="sa"
+                    password="Password0!"
+                    maxPoolSize="100"
+                    minPoolSize="5"
+                    blockingTimeoutMillis="1000"
+                    idleTimeoutMinutes="5"
+                    activeTimeoutMinutes="0"
+                    sqlExceptionSorter="org.nuxeo.runtime.datasource.DatasourceExceptionSorter"
+                    validationQuery=""
+                    accessToUnderlyingConnectionAllowed="true"/>
+    </extension>
+</component>

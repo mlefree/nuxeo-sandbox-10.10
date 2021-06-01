@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<component name="default-repository-config">
+    <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
+        <blobprovider name="default">
+            <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+            <property name="path"></property>
+            <property name="key"></property>
+        </blobprovider>
+    </extension>
+
+    <extension target="org.nuxeo.ecm.core.storage.sql.RepositoryService"
+               point="repository">
+        <repository name="default" label="label.default.repository">
+            <pool minPoolSize="0" maxPoolSize="20"
+                  blockingTimeoutMillis="100"
+                  idleTimeoutMinutes="10"
+                  activeTimeoutMinutes="0"/>
+            <clustering id="" enabled="false" delay="1000"/>
+            <clusterInvalidatorClass>org.nuxeo.ecm.core.storage.sql.VCSPubSubInvalidator</clusterInvalidatorClass>
+            <noDDL>false</noDDL>
+            <ddlMode>execute</ddlMode>
+            <aclOptimizations enabled="true"/>
+            <pathOptimizations enabled="true"/>
+            <idType>varchar</idType>
+            <changeTokenEnabled>true</changeTokenEnabled>
+            <indexing>
+                <fulltext disabled="false" searchDisabled="false"
+                          analyzer="english">
+                    <index name="default">
+                        <!-- all props implied -->
+                    </index>
+                    <!-- SQL Server does not support more than one fulltext index per
+                    table: to add support for multiple fulltext index would required to
+                    change the datamodel of VCS -->
+                </fulltext>
+            </indexing>
+            <usersSeparator key=","/>
+        </repository>
+    </extension>
+
+    <extension target="org.nuxeo.runtime.kv.KeyValueService" point="configuration">
+        <store name="default" class="org.nuxeo.ecm.core.storage.sql.kv.SQLKeyValueStore">
+            <property name="datasource">jdbc/keyvaluestore</property>
+            <property name="table">kv</property>
+        </store>
+    </extension>
+
+</component>
