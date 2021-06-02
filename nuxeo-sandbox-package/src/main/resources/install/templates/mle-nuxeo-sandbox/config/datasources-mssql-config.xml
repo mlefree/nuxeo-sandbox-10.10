@@ -3,16 +3,13 @@
 
     <extension target="org.nuxeo.runtime.datasource" point="datasources">
         <datasource name="jdbc/repository_mssql" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                    url="jdbc:sqlserver://mssql:1433;database=nuxeo;selectMethod=cursor"
-                    username="sa"
-                    password="Password0!"
-                    maxPoolSize="100"
-                    minPoolSize="5"
-                    blockingTimeoutMillis="1000"
-                    idleTimeoutMinutes="5"
-                    activeTimeoutMinutes="0"
-                    sqlExceptionSorter="org.nuxeo.runtime.datasource.DatasourceExceptionSorter"
-                    validationQuery=""
-                    accessToUnderlyingConnectionAllowed="true"/>
+                    xaDataSource="com.microsoft.sqlserver.jdbc.SQLServerDataSource"
+                    maxPoolSize="100" minPoolSize="5" blockingTimeoutMillis="10000">
+            <property name="ServerName">mssql</property>
+            <property name="PortNumber">1433</property>
+            <property name="DatabaseName">nuxeo</property>
+            <property name="User">sa</property>
+            <property name="Password">Password0!</property>
+        </datasource>
     </extension>
 </component>
