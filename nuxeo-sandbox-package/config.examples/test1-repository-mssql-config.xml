@@ -1,16 +1,12 @@
 <?xml version="1.0"?>
-<component name="mssql-repository-config">
-    <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
-        <blobprovider name="mssql">
-            <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
-            <property name="path"></property>
-            <property name="key"></property>
-        </blobprovider>
-    </extension>
+<component name="repository-mssql-config">
+
+    <require>datasources-mssql-config</require>
 
     <extension target="org.nuxeo.ecm.core.storage.sql.RepositoryService"
                point="repository">
-        <repository name="mssql" label="label.mssql.repository">
+        <repository name="mssql" label="mssql repo"
+                    factory="org.nuxeo.ecm.core.storage.sql.ra.PoolingRepositoryFactory">
             <pool minPoolSize="0" maxPoolSize="20"
                   blockingTimeoutMillis="100"
                   idleTimeoutMinutes="10"
@@ -36,6 +32,14 @@
             </indexing>
             <usersSeparator key=","/>
         </repository>
+    </extension>
+
+    <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
+        <blobprovider name="mssql">
+            <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+            <property name="path"></property>
+            <property name="key"></property>
+        </blobprovider>
     </extension>
 
 </component>

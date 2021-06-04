@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.ecm.core.storage.sql.mle.mssql">
+
+    <extension target="org.nuxeo.runtime.datasource"
+               point="datasources">
+
+        <datasource name="jdbc/mlemssqlrepo01"
+                    driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                    maxTotal="30" minTotal="5" maxWaitMillis="10000">
+            <property name="url">jdbc:sqlserver://mssql:1433;database=mlemssqlrepo01;selectMethod=cursor</property>
+            <property name="username">sa</property>
+            <property name="password">Password0!</property>
+        </datasource>
+
+        <link name="jdbc/repository_mlemssqlrepo01" global="jdbc/mlemssqlrepo01"/>
+    </extension>
+
+    <extension target="org.nuxeo.ecm.core.storage.sql.RepositoryService"
+               point="repository">
+        <repository name="mlemssqlrepo01">
+            <pool minPoolSize="0" maxPoolSize="20"
+                  blockingTimeoutMillis="100"
+                  idleTimeoutMinutes="10"
+                  activeTimeoutMinutes="0"/>
+            <clustering id="" enabled="false" delay="1000"/>
+            <clusterInvalidatorClass>org.nuxeo.ecm.core.storage.sql.VCSPubSubInvalidator</clusterInvalidatorClass>
+            <noDDL>false</noDDL>
+            <ddlMode>execute</ddlMode>
+            <aclOptimizations enabled="true"/>
+            <pathOptimizations enabled="true"/>
+            <idType>varchar</idType>
+            <changeTokenEnabled>true</changeTokenEnabled>
+            <!--
+            <indexing>
+                <fulltext disabled="false" searchDisabled="false"
+                          analyzer="english">
+                    <index name="default">
+                        - all props implied -
+                    </index>
+        - SQL Server does not support more than one fulltext index per
+                    table: to add support for multiple fulltext index would required to
+                    change the datamodel of VCS -
+                </fulltext>
+            </indexing>
+            <usersSeparator key=","/> -->
+
+
+            <schema>
+                <field type="largetext">note</field>
+                <field type="largetext">relatedtext</field>
+            </schema>
+            <indexing>
+                <neverPerDocumentFacets>
+                    <facet>NotPerDocFacet</facet>
+                </neverPerDocumentFacets>
+                <fulltext catalog="nuxeo" analyzer="French"
+                          disabled="true"
+                          storedInBlob="true"
+                          searchDisabled="true"/>
+            </indexing>
+            <xa-datasource>mlemssqlrepo01</xa-datasource>
+            <property name="ServerName">mssql</property>
+            <property name="PortNumber">1433</property>
+            <property name="DatabaseName">mlemssqlrepo01</property>
+            <property name="User">sa</property>
+            <property name="Password">Password0!</property>
+            <property name="UseCursors">true</property>
+        </repository>
+    </extension>
+    <!--
+        <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
+            <blobprovider name="mlemssqlrepo01">
+                <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+                <property name="path"></property>
+                <property name="key"></property>
+            </blobprovider>
+        </extension>
+
+
+        <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
+            <elasticSearchIndex name="mle-mssql-repo01" create="true" type="doc" repository="mlemssqlrepo01" manageAlias="true"/>
+        </extension>-->
+
+</component>

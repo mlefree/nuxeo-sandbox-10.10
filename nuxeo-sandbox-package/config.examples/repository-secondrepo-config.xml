@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<component name="repository-secondrepo-config">
+    <extension target="org.nuxeo.ecm.core.storage.sql.RepositoryService"
+               point="repository">
+        <repository name="secondrepo" label="My Second Repository"
+                    factory="org.nuxeo.ecm.core.storage.sql.ra.PoolingRepositoryFactory">
+            <pool minPoolSize="0" maxPoolSize="20" blockingTimeoutMillis="100" idleTimeoutMinutes="10" />
+            <clustering enabled="false" delay="1000" />
+            <!-- ... other options for your repository ... -->
+        </repository>
+    </extension>
+
+    <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
+        <blobprovider name="secondrepo">
+            <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+            <property name="path">binaries2</property>
+        </blobprovider>
+    </extension>
+
+</component>

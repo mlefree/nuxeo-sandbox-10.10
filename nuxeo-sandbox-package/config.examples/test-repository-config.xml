@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<component name="mle-nuxeo-training-repository-config">
+
+  <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
+    <blobprovider name="mlenuxeotrainingrepo01">
+      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+      <property name="path">/home/mle/nuxeobinaries/mlenuxeotrainingrepo01</property>
+    </blobprovider>
+
+    <blobprovider name="mlenuxeotrainingrepo02">
+      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+      <property name="path">/home/mle/nuxeobinaries/mlenuxeotrainingrepo02</property>
+    </blobprovider>
+
+    <blobprovider name="mlenuxeotrainingrepo02rev1">
+      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+      <property name="path">/home/mle/nuxeobinaries/mlenuxeotrainingrepo02rev1</property>
+    </blobprovider>
+
+    <blobprovider name="mlenuxeotrainingrepo02rev2">
+      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+      <property name="path">/home/mle/nuxeobinaries/mlenuxeotrainingrepo02rev2</property>
+    </blobprovider>
+
+    <blobprovider name="mlenuxeotrainingrepo03">
+      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+      <property name="path">/home/mle/nuxeobinaries/mlenuxeotrainingrepo03</property>
+    </blobprovider>
+
+  </extension>
+
+  <extension target="org.nuxeo.ecm.core.blob.DocumentBlobManager" point="configuration">
+
+    <!-- Blob Dispatcher (Rules) defined to assign binaries to a specific storage -->
+    <blobdispatcher>
+      <class>org.nuxeo.ecm.core.blob.DefaultBlobDispatcher</class>
+      <property name="ecm:repositoryName=mlenuxeotrainingrepo01">mlenuxeotrainingrepo01</property>
+      <property name="ecm:repositoryName=mlenuxeotrainingrepo02,dc:source=1">mlenuxeotrainingrepo02rev1</property>
+      <property name="ecm:repositoryName=mlenuxeotrainingrepo02,dc:source=2">mlenuxeotrainingrepo02rev2</property>
+      <property name="ecm:repositoryName=mlenuxeotrainingrepo02">mlenuxeotrainingrepo02</property>
+      <property name="ecm:repositoryName=mlenuxeotrainingrepo03">mlenuxeotrainingrepo03</property>
+      <property name="default">default</property>
+    </blobdispatcher>
+  </extension>
+
+  <require>org.nuxeo.runtime.mongodb.MongoDBComponent</require>
+
+  <extension target="org.nuxeo.ecm.core.storage.mongodb.MongoDBRepositoryService" point="repository">
+
+    <repository name="mlenuxeotrainingrepo01" label="MLENuxeoTrainingRepo01">
+      <server>mongodb://localhost/?maxPoolSize=200</server>
+      <dbname>mlenuxeotrainingrepo01</dbname>
+      <fulltext disabled="true" searchDisabled="true" />
+      <cache enabled="true" maxSize="1000" concurrencyLevel="10" ttl="10" />
+      <clustering id="" enabled="false">
+        <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
+      </clustering>
+      <changeTokenEnabled>true</changeTokenEnabled>
+    </repository>
+
+   <repository name="mlenuxeotrainingrepo02" label="MLENuxeoTrainingRepo02">
+      <server>mongodb://localhost/?maxPoolSize=200</server>
+      <dbname>mlenuxeotrainingrepo02</dbname>
+      <fulltext disabled="true" searchDisabled="true" />
+      <cache enabled="true" maxSize="1000" concurrencyLevel="10" ttl="10" />
+      <clustering id="" enabled="false">
+        <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
+      </clustering>
+      <changeTokenEnabled>true</changeTokenEnabled>
+    </repository>
+
+   <repository name="mlenuxeotrainingrepo03" label="MLENuxeoTrainingRepo03">
+      <server>mongodb://localhost/?maxPoolSize=200</server>
+      <dbname>mlenuxeotrainingrepo03</dbname>
+      <fulltext disabled="true" searchDisabled="true" />
+      <cache enabled="true" maxSize="1000" concurrencyLevel="10" ttl="10" />
+      <clustering id="" enabled="false">
+        <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
+      </clustering>
+      <changeTokenEnabled>true</changeTokenEnabled>
+    </repository>
+
+  </extension>
+
+  <!-- ELASTIC SEARCH -->
+  <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
+    <elasticSearchIndex name="mle-nuxeo-training-repo01" create="true" type="doc" repository="mlenuxeotrainingrepo01"/>
+    <elasticSearchIndex name="mle-nuxeo-training-repo02" create="true" type="doc" repository="mlenuxeotrainingrepo02" manageAlias="true"/>
+    <elasticSearchIndex name="mle-nuxeo-training-repo03" create="true" type="doc" repository="mlenuxeotrainingrepo03" manageAlias="true">
+      <settings file="elasticsearch-doc-empty-settings.json" />
+      <mapping file="elasticsearch-doc-empty-mapping.json" />
+    </elasticSearchIndex>
+  </extension>
+
+</component>
+
+

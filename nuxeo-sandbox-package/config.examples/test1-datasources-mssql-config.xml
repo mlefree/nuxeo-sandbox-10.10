@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<component name="org.nuxeo.runtime.datasource.server.contrib">
+<component name="datasources-mssql-config">
 
     <extension target="org.nuxeo.runtime.datasource" point="datasources">
-        <datasource name="jdbc/repository_mssql" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                    xaDataSource="com.microsoft.sqlserver.jdbc.SQLServerDataSource"
+        <datasource name="jdbc/repository_mssql"
+                    xaDataSource="com.microsoft.sqlserver.jdbc.SQLServerXADataSource"
                     maxPoolSize="100" minPoolSize="5" blockingTimeoutMillis="10000">
             <property name="ServerName">mssql</property>
             <property name="PortNumber">1433</property>
@@ -11,5 +11,6 @@
             <property name="User">sa</property>
             <property name="Password">Password0!</property>
         </datasource>
+        <link name="jdbc/repository_mssql" global="jdbc/nuxeo" type="javax.sql.DataSource"/>
     </extension>
 </component>

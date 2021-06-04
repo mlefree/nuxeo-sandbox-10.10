@@ -2,8 +2,10 @@
 <component name="org.nuxeo.runtime.datasource.server.contrib">
 
     <extension target="org.nuxeo.runtime.datasource" point="datasources">
-        <datasource name="jdbc/nuxeo" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                    url="jdbc:sqlserver://mssql:1433;database=nuxeo;selectMethod=cursor" username="sa"
+        <datasource name="jdbc/nuxeo"
+                    driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                    url="jdbc:sqlserver://mssql:1433;database=nuxeo;selectMethod=cursor"
+                    username="sa"
                     password="Password0!"
                     maxPoolSize="100"
                     minPoolSize="5"
