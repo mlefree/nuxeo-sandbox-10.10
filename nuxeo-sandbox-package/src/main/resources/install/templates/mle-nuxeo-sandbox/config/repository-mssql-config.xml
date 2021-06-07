@@ -43,8 +43,6 @@
                 </fulltext>
             </indexing>
             <usersSeparator key=","/> -->
-
-
             <schema>
                 <field type="largetext">note</field>
                 <field type="largetext">relatedtext</field>
@@ -75,10 +73,13 @@
                 <property name="key"></property>
             </blobprovider>
         </extension>
-
-
         <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
             <elasticSearchIndex name="mle-mssql-repo01" create="true" type="doc" repository="mlemssqlrepo01" manageAlias="true"/>
-        </extension>-->
+        </extension>
+        -->
+
+    <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
+        <elasticSearchIndex name="mle-mssql-repo01" repository="mlemssqlrepo01" type="doc"/>
+    </extension>
 
 </component>

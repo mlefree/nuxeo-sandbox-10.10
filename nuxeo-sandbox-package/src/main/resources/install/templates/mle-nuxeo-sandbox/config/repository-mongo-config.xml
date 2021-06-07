@@ -71,11 +71,10 @@
 
   </extension>
 
-  <!-- ELASTIC SEARCH
   <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
-    <elasticSearchIndex name="mle-mongo-repo01" create="true" type="doc" repository="mlemongorepo01"/>
-    <elasticSearchIndex name="mle-mongo-repo02" create="true" type="doc" repository="mlemongorepo02" manageAlias="true"/>
-  </extension>-->
+    <elasticSearchIndex name="mle-mongo-repo01" repository="mlemongorepo01" type="doc"/>
+    <elasticSearchIndex name="mle-mongo-repo02" repository="mlemongorepo02" manageAlias="true" type="doc"/>
+  </extension>
 
 </component>
 
