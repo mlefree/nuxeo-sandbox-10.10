@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<component name="com.mlefree.nuxeo.sandbox.audit.storage.test.stream">
+
+  <require>org.nuxeo.runtime.stream.service</require>
+
+  <extension target="org.nuxeo.runtime.stream.service" point="streamProcessor">
+    <streamProcessor
+            name="MLEAuditStorageLogWriter"
+            defaultConcurrency="1"
+            defaultPartitions="1"
+      class="com.mlefree.nuxeo.sandbox.audit.storage.stream.StreamAuditStorageWriter"></streamProcessor>
+  </extension>
+
+</component>

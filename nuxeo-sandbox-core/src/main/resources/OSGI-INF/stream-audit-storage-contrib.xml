@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="com.mlefree.nuxeo.sandbox.audit.storage.stream">
+
+  <require>org.nuxeo.runtime.stream.service</require>
+
+  <extension target="org.nuxeo.runtime.stream.service" point="streamProcessor">
+    <streamProcessor name="MLEAuditStorageLogWriter"
+                     logConfig="audit"
+                     defaultConcurrency="1"
+                     defaultPartitions="1"
+                     defaultCodec="legacy"
+                     class="com.mlefree.nuxeo.sandbox.audit.storage.stream.StreamAuditStorageWriter"
+                     enabled="true">
+      <policy name="MLEAuditStorageLogWriter"
+              batchCapacity="10"
+              batchThreshold="50ms"
+              maxRetries="20" delay="1s" maxDelay="60s" continueOnFailure="false" />
+    </streamProcessor>
+  </extension>
+
+</component>
