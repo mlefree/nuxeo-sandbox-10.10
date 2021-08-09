@@ -47,7 +47,7 @@
 
   <extension target="org.nuxeo.ecm.core.storage.mongodb.MongoDBRepositoryService" point="repository">
 
-    <repository name="mlemongorepo01" label="mlemongorepo01">
+    <repository name="mlemongorepo01" label="mlemongorepo01" headless="false">
       <server>mongodb://mongo:27017/?maxPoolSize=200</server>
       <dbname>mlemongorepo01</dbname>
       <fulltext disabled="true" searchDisabled="true" />
@@ -58,7 +58,7 @@
       <changeTokenEnabled>true</changeTokenEnabled>
     </repository>
 
-   <repository name="mlemongorepo02" label="mlemongorepo02">
+   <repository name="mlemongorepo02" label="mlemongorepo02" headless="false">
       <server>mongodb://mongo:27017/?maxPoolSize=200</server>
       <dbname>mlemongorepo02</dbname>
       <fulltext disabled="true" searchDisabled="true" />
