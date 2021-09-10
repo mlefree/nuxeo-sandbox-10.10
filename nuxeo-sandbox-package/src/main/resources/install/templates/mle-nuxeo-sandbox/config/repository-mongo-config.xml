@@ -1,81 +1,55 @@
 <?xml version="1.0"?>
-<component name="org.nuxeo.ecm.core.storage.sql.mle.mongo">
+<component name="org.nuxeo.ecm.core.storage.mle.mongo">
 
-    <!--
-  <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
-    <blobprovider name="mlemongorepo01">
-      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
-      <property name="path">/home/mle/nuxeobinaries/mlemongorepo01</property>
-    </blobprovider>
+    <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
+        <blobprovider name="mlemongorepo01">
+            <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+        </blobprovider>
+        <blobprovider name="mlemongorepo02">
+            <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+        </blobprovider>
+    </extension>
 
-    <blobprovider name="mlemongorepo02">
-      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
-      <property name="path">/home/mle/nuxeobinaries/mlemongorepo02</property>
-    </blobprovider>
+    <extension target="org.nuxeo.ecm.core.blob.DocumentBlobManager" point="configuration">
+        <blobdispatcher>
+            <class>org.nuxeo.ecm.core.blob.DefaultBlobDispatcher</class>
+            <property name="ecm:repositoryName=mlemongorepo01">mlemongorepo01</property>
+            <property name="ecm:repositoryName=mlemongorepo02">mlemongorepo02</property>
+            <property name="default">default</property>
+        </blobdispatcher>
+    </extension>
 
-    <blobprovider name="mlemongorepo02rev1">
-      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
-      <property name="path">/home/mle/nuxeobinaries/mlemongorepo02rev1</property>
-    </blobprovider>
+    <require>org.nuxeo.runtime.mongodb.MongoDBComponent</require>
 
-    <blobprovider name="mlemongorepo02rev2">
-      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
-      <property name="path">/home/mle/nuxeobinaries/mlemongorepo02rev2</property>
-    </blobprovider>
+    <extension target="org.nuxeo.ecm.core.storage.mongodb.MongoDBRepositoryService" point="repository">
 
-    <blobprovider name="mlemongorepo03">
-      <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
-      <property name="path">/home/mle/nuxeobinaries/mlemongorepo03</property>
-    </blobprovider>
+        <repository name="mlemongorepo01" label="mlemongorepo01" headless="false">
+            <server>mongodb://mongo:27017/?maxPoolSize=200</server>
+            <dbname>mlemongorepo01</dbname>
+            <fulltext disabled="true" searchDisabled="true"/>
+            <cache enabled="true" maxSize="1000" concurrencyLevel="10" ttl="10"/>
+            <clustering id="" enabled="false">
+                <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
+            </clustering>
+            <changeTokenEnabled>true</changeTokenEnabled>
+        </repository>
 
-  </extension>
+        <repository name="mlemongorepo02" label="mlemongorepo02" headless="false">
+            <server>mongodb://mongo:27017/?maxPoolSize=200</server>
+            <dbname>mlemongorepo02</dbname>
+            <fulltext disabled="true" searchDisabled="true"/>
+            <cache enabled="true" maxSize="1000" concurrencyLevel="10" ttl="10"/>
+            <clustering id="" enabled="false">
+                <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
+            </clustering>
+            <changeTokenEnabled>true</changeTokenEnabled>
+        </repository>
 
-  <extension target="org.nuxeo.ecm.core.blob.DocumentBlobManager" point="configuration">
-    <blobdispatcher>
-      <class>org.nuxeo.ecm.core.blob.DefaultBlobDispatcher</class>
-      <property name="ecm:repositoryName=mlemongorepo01">mlemongorepo01</property>
-      <property name="ecm:repositoryName=mlemongorepo02,dc:source=1">mlemongorepo02rev1</property>
-      <property name="ecm:repositoryName=mlemongorepo02,dc:source=2">mlemongorepo02rev2</property>
-      <property name="ecm:repositoryName=mlemongorepo02">mlemongorepo02</property>
-      <property name="ecm:repositoryName=mlemongorepo03">mlemongorepo03</property>
-      <property name="default">default</property>
-    </blobdispatcher>
-  </extension>
-  -->
+    </extension>
 
-  <require>org.nuxeo.runtime.mongodb.MongoDBComponent</require>
-
-  <extension target="org.nuxeo.ecm.core.storage.mongodb.MongoDBRepositoryService" point="repository">
-
-    <repository name="mlemongorepo01" label="mlemongorepo01" headless="false">
-      <server>mongodb://mongo:27017/?maxPoolSize=200</server>
-      <dbname>mlemongorepo01</dbname>
-      <fulltext disabled="true" searchDisabled="true" />
-      <cache enabled="true" maxSize="1000" concurrencyLevel="10" ttl="10" />
-      <clustering id="" enabled="false">
-        <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
-      </clustering>
-      <changeTokenEnabled>true</changeTokenEnabled>
-    </repository>
-
-   <repository name="mlemongorepo02" label="mlemongorepo02" headless="false">
-      <server>mongodb://mongo:27017/?maxPoolSize=200</server>
-      <dbname>mlemongorepo02</dbname>
-      <fulltext disabled="true" searchDisabled="true" />
-      <cache enabled="true" maxSize="1000" concurrencyLevel="10" ttl="10" />
-      <clustering id="" enabled="false">
-        <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
-      </clustering>
-      <changeTokenEnabled>true</changeTokenEnabled>
-    </repository>
-
-  </extension>
-
-  <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
-    <elasticSearchIndex name="mle-mongo-repo01" repository="mlemongorepo01" type="doc"/>
-    <elasticSearchIndex name="mle-mongo-repo02" repository="mlemongorepo02" manageAlias="true" type="doc"/>
-  </extension>
+    <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
+        <elasticSearchIndex name="mle-mongo-repo01" repository="mlemongorepo01" type="doc"/>
+        <elasticSearchIndex name="mle-mongo-repo02" repository="mlemongorepo02" manageAlias="true" type="doc"/>
+    </extension>
 
 </component>
-
-

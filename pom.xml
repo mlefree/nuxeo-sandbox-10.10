@@ -20,7 +20,7 @@
         <!-- Skip Nuxeo enforcer rules by default -->
         <nuxeo.skip.enforcer>true</nuxeo.skip.enforcer>
         <nuxeo.target.version>10.10</nuxeo.target.version>
-        <studio.project.version>10-10-SNAPSHOT</studio.project.version>
+        <studio.project.version>supnxp-36068-SNAPSHOT</studio.project.version>
     </properties>
 
     <modules>
