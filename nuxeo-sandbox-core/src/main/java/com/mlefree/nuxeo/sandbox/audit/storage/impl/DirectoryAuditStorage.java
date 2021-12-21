@@ -1,13 +1,7 @@
 package com.mlefree.nuxeo.sandbox.audit.storage.impl;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.elasticsearch.action.bulk.BulkRequest;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.common.xcontent.XContentType;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.nuxeo.ecm.core.api.CursorService;
 import org.nuxeo.ecm.core.api.DocumentModelList;
 import org.nuxeo.ecm.core.api.NuxeoException;
@@ -21,11 +15,6 @@ import org.nuxeo.ecm.directory.Directory;
 import org.nuxeo.ecm.directory.Session;
 import org.nuxeo.ecm.directory.api.DirectoryService;
 import org.nuxeo.ecm.platform.audit.api.AuditStorage;
-import org.nuxeo.ecm.platform.audit.api.ExtendedInfo;
-import org.nuxeo.ecm.platform.audit.api.LogEntry;
-import org.nuxeo.ecm.platform.audit.service.AbstractAuditBackend;
-import org.nuxeo.ecm.platform.audit.service.AuditBackend;
-import org.nuxeo.elasticsearch.ElasticSearchConstants;
 import org.nuxeo.runtime.api.Framework;
 
 import java.io.Serializable;
@@ -38,8 +27,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static org.nuxeo.ecm.platform.audit.api.BuiltinLogEntryData.LOG_ID;
 
 public class DirectoryAuditStorage implements AuditStorage { // extends AbstractAuditBackend implements AuditBackend,
 

@@ -10,7 +10,7 @@
                      defaultPartitions="1"
                      defaultCodec="legacy"
                      class="com.mlefree.nuxeo.sandbox.audit.storage.stream.StreamAuditStorageWriter"
-                     enabled="true">
+                     enabled="${audit.elasticsearch.migration:=true}">
       <policy name="MLEAuditStorageLogWriter"
               batchCapacity="10"
               batchThreshold="50ms"

@@ -45,7 +45,7 @@ public class AuditMleRestore {
                                                                      .getComponent(NXAuditEventsService.NAME);
         ESAuditBackend esBackend = (ESAuditBackend) Framework.getService(AuditBackend.class);
 
-        auditBackend.restore(audit.getAuditStorage(auditStorageId), batchSize, keepAlive);
+        //auditBackend.restore(audit.getAuditStorage(auditStorageId), batchSize, keepAlive);
 
         List<LogEntry> entries = esBackend.queryLogs(new AuditQueryBuilder());
         System.out.println(entries.size());

@@ -56,7 +56,7 @@ public class TestRestorationFromDirectoryAuditStorage {
 
         storage.append(jsonEntries);
         try (Session storageSession = storage.getAuditDirectory().getSession()) {
-            assertEquals(nbEntries + 6, storageSession.query(Collections.emptyMap()).size());
+            assertEquals(nbEntries , storageSession.query(Collections.emptyMap()).size());
         }
 
         AuditBackend backend = audit.getBackend();
