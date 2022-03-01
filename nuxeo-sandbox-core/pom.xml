@@ -93,10 +93,5 @@
       <artifactId>nuxeo-web-resources-core</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>nuxeo-studio</groupId>
-      <artifactId>mleprevost-SANDBOX</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 </project>

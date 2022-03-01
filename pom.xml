@@ -52,12 +52,6 @@
         <artifactId>mleprevost-SANDBOX</artifactId>
         <version>${studio.project.version}</version>
       </dependency>
-      <dependency>
-        <groupId>nuxeo-studio</groupId>
-        <artifactId>mleprevost-SANDBOX</artifactId>
-        <version>${studio.project.version}</version>
-        <scope>test</scope>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
