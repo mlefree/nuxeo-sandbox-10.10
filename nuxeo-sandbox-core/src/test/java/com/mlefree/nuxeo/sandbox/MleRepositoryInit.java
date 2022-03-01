@@ -6,6 +6,8 @@ import org.nuxeo.ecm.core.test.annotations.RepositoryInit;
 
 public class MleRepositoryInit implements RepositoryInit {
 
+    public static String ASSET_PATH = "/data/est-sunt-11.pdf";
+
     @Override
     public void populate(CoreSession session) {
 

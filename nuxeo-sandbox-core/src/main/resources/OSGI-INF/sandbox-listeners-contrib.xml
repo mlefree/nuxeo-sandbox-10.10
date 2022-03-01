@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<component name="com.mlefree.nuxeo.sandbox.listeners">
+
+    <extension target="org.nuxeo.ecm.core.event.EventServiceComponent" point="listener">
+        <listener async="false" name="sessionSaved"
+                  class="com.mlefree.nuxeo.sandbox.listeners.MleFilesPopulating">
+            <!-- <event>sessionSaved</event>
+             <event>documentModified</event>-->
+            <event>binaryTextUpdated</event>
+        </listener>
+    </extension>
+
+</component>

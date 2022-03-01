@@ -1,4 +1,4 @@
-package com.mlefree.nuxeo.sandbox.studio;
+package com.mlefree.nuxeo.sandbox.constants;
 
 public class StudioConstant {
     private StudioConstant() {}
@@ -10,6 +10,12 @@ public class StudioConstant {
     public static final String FILE_DOC_TYPE = "File";
 
     public static final String MLE_FILE_DOC_TYPE = "mleFile";
+
+    public static final String MLE_FILES_SCHEMA = "mleFiles";
+
+    public static final String MLE_FILES_SCHEMA_FILES_PROPERTY = "mleFiles:files";
+
+    public static final String MLE_FILES_SCHEMA_PAGE_COUNT_PROPERTY = "mleFiles:pageCount";
 
     public static final String MLEFILE_SCHEMA = "mlefile";
 
