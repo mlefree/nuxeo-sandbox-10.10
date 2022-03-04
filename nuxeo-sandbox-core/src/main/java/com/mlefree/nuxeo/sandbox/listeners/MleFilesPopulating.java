@@ -1,6 +1,7 @@
 package com.mlefree.nuxeo.sandbox.listeners;
 
 import static com.mlefree.nuxeo.sandbox.constants.Constants.FILES_FILE;
+import static com.mlefree.nuxeo.sandbox.constants.Constants.FULLTEXT_BINARY;
 import static com.mlefree.nuxeo.sandbox.constants.Constants.MLE_FILES_BINARY;
 import static com.mlefree.nuxeo.sandbox.constants.Constants.MLE_FILES_FULLTEXT;
 import static com.mlefree.nuxeo.sandbox.constants.Constants.MLE_FILES_SIZE;
@@ -39,6 +40,8 @@ import org.nuxeo.runtime.api.Framework;
 
 public class MleFilesPopulating implements EventListener {
 
+    public static final String MLE_FILES_POPULATING = "mleFilesPopulating";
+
     private static final Log log = LogFactory.getLog(MleFilesPopulating.class);
 
     @Override
@@ -52,12 +55,12 @@ public class MleFilesPopulating implements EventListener {
         CoreSession session = docCtx.getCoreSession();
         DocumentModel doc = docCtx.getSourceDocument();
 
-        if (doc == null || !doc.hasSchema(MLE_FILES_SCHEMA)
-        // || doc.getSystemProp(SYSPROP_FULLTEXT_JOBID, String.class) != null
-                || ((List) doc.getPropertyValue("files:files")).size() == 0
-        // || doc.getPropertyValue("file:content") == null
-        // || doc.getBinaryFulltext().get("binarytext") == null
-        ) {
+        if (doc == null) {
+            return;
+        }
+
+        if (!doc.hasSchema(MLE_FILES_SCHEMA) || ((List<?>) doc.getPropertyValue("files:files")).isEmpty()
+                || !event.getContext().getProperties().get("systemProperty").equals(FULLTEXT_BINARY)) {
             return;
         }
 
@@ -73,21 +76,20 @@ public class MleFilesPopulating implements EventListener {
             mleFiles.add(mleFile);
         }
 
-        doc.setPropertyValue(MLE_FILES_SCHEMA_PAGE_COUNT_PROPERTY, files.size());
-        doc.setPropertyValue(MLE_FILES_SCHEMA_FILES_PROPERTY, (Serializable) mleFiles);
-        saveDocument(session, doc);
+        if (!isIdentical(doc, mleFiles)) {
+            doc.setPropertyValue(MLE_FILES_SCHEMA_PAGE_COUNT_PROPERTY, mleFiles.size());
+            doc.setPropertyValue(MLE_FILES_SCHEMA_FILES_PROPERTY, (Serializable) mleFiles);
+            saveDocument(session, doc);
+        }
     }
 
     private void saveDocument(CoreSession session, DocumentModel doc) {
-
         doc.putContextData(ALLOW_VERSION_WRITE, TRUE);
         doc.putContextData(DISABLE_AUTO_CHECKOUT, TRUE);
         doc.putContextData(DISABLE_DUBLINCORE_LISTENER, TRUE);
         doc.putContextData(DISABLE_NOTIFICATION_SERVICE, TRUE);
         doc.putContextData(DISABLE_HTMLSANITIZER_LISTENER, TRUE);
         doc.putContextData(PARAM_DISABLE_AUDIT, TRUE);
-        // doc.putContextData(VersioningService.VERSIONING_OPTION, null);
-
         session.saveDocument(doc);
     }
 
@@ -117,6 +119,14 @@ public class MleFilesPopulating implements EventListener {
             log.warn(msg);
             log.debug(msg, e);
             return "";
+        }
+    }
+
+    protected boolean isIdentical(DocumentModel doc, List<Map<String, Serializable>> files) {
+        try {
+            return files.size() == Math.toIntExact((Long) doc.getPropertyValue(MLE_FILES_SCHEMA_PAGE_COUNT_PROPERTY));
+        } catch (Exception e) {
+            return false;
         }
     }
 }

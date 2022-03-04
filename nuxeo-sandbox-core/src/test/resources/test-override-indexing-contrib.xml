@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<component name="com.mlefree.nuxeo.sandbox.test">
+
+  <require>org.nuxeo.ecm.core.storage.sql.RepositoryService</require>
+  <extension target="org.nuxeo.ecm.core.storage.sql.RepositoryService"
+    point="repository">
+    <repository name="test">
+      <indexing>
+        <fulltext fieldSizeLimit="4">
+          <index name="binaries">
+            <fieldType>blob</fieldType>
+          </index>
+        </fulltext>
+      </indexing>
+    </repository>
+  </extension>
+</component>

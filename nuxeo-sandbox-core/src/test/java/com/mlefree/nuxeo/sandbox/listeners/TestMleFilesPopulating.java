@@ -1,6 +1,7 @@
 package com.mlefree.nuxeo.sandbox.listeners;
 
 import static com.mlefree.nuxeo.sandbox.MleRepositoryInit.ASSET_PATH;
+import static com.mlefree.nuxeo.sandbox.constants.Constants.BINARY_TEXT;
 import static com.mlefree.nuxeo.sandbox.constants.Constants.MLE_FILES_FULLTEXT;
 import static com.mlefree.nuxeo.sandbox.constants.Constants.MLE_FILES_SIZE;
 import static com.mlefree.nuxeo.sandbox.constants.StudioConstant.MLE_FILES_SCHEMA_FILES_PROPERTY;
@@ -35,6 +36,7 @@ import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
 import org.nuxeo.ecm.core.event.EventService;
 import org.nuxeo.ecm.core.work.api.WorkManager;
 import org.nuxeo.runtime.api.Framework;
+import org.nuxeo.runtime.test.runner.Deploy;
 import org.nuxeo.runtime.test.runner.Features;
 import org.nuxeo.runtime.test.runner.FeaturesRunner;
 import org.nuxeo.runtime.transaction.TransactionHelper;
@@ -43,9 +45,8 @@ import com.mlefree.nuxeo.sandbox.MleFeature;
 
 @RunWith(FeaturesRunner.class)
 @Features({ MleFeature.class, AutomationFeature.class, CollectionFeature.class })
+@Deploy("com.mlefree.nuxeo.sandbox.test:test-override-indexing-contrib.xml")
 public class TestMleFilesPopulating {
-
-    protected final List<String> events = Arrays.asList("sessionSaved");
 
     @Inject
     protected CoreSession session;
@@ -123,6 +124,8 @@ public class TestMleFilesPopulating {
             assertEquals(1, ((List<?>) doc.getPropertyValue(MLE_FILES_SCHEMA_FILES_PROPERTY)).size());
             Map<String, Serializable> mleFile = (Map<String, Serializable>) ((List<?>) doc.getPropertyValue(
                     MLE_FILES_SCHEMA_FILES_PROPERTY)).get(0);
+            assertEquals(" exp", doc.getBinaryFulltext().get(BINARY_TEXT));
+            assertEquals(2900,((String) mleFile.get(MLE_FILES_FULLTEXT)).length());
             assertTrue(((String) mleFile.get(MLE_FILES_FULLTEXT)).contains("explicabo."));
             assertEquals(29401, Math.toIntExact((Long) mleFile.get(MLE_FILES_SIZE)));
         }

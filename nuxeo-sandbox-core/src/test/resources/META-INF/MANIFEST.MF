@@ -1,8 +1,6 @@
-Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
 Manifest-Version: 1.0
-Bundle-Vendor: com.mlefree.nuxeo.sandbox
-Bundle-Version: 1.0.0
-Bundle-Name: nuxeo-sandbox-core-test
+Bundle-Name: nuxeo-sandbox-test
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: com.mlefree.nuxeo.sandbox.nuxeo-sandbox-core-test;singleton=true
+Bundle-SymbolicName: com.mlefree.nuxeo.sandbox.test;singleton=true
+Bundle-Vendor: Nuxeo
+

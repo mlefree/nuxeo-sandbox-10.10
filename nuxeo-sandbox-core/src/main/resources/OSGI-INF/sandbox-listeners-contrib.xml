@@ -2,12 +2,19 @@
 <component name="com.mlefree.nuxeo.sandbox.listeners">
 
     <extension target="org.nuxeo.ecm.core.event.EventServiceComponent" point="listener">
-        <listener async="false" name="sessionSaved"
-                  class="com.mlefree.nuxeo.sandbox.listeners.MleFilesPopulating">
-            <!-- <event>sessionSaved</event>
-             <event>documentModified</event>-->
+
+        <listener name="filesPopulating" class="com.mlefree.nuxeo.sandbox.listeners.MleFilesPopulating"
+                  async="false">
             <event>binaryTextUpdated</event>
         </listener>
+
+        <listener name="removeFulltext" class="com.mlefree.nuxeo.sandbox.listeners.RemoveFulltextInfo"
+                  async="false">
+            <!--<event>documentCreated</event>
+            <event>beforeDocumentModification</event>-->
+            <event>documentModified</event>
+        </listener>
+
     </extension>
 
 </component>
