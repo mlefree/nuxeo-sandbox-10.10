@@ -117,7 +117,6 @@ public class MleFilesPopulating implements EventListener {
         } catch (ConversionException | IOException e) {
             String msg = "Could not extract fulltext of file '" + blob.getFilename() + "' : " + e;
             log.warn(msg);
-            log.debug(msg, e);
             return "";
         }
     }

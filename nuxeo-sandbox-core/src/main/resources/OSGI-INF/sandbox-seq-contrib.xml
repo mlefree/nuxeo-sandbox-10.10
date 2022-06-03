@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<component name="com.mlefree.nuxeo.sandbox.seqgen.contrib" version="1.0">
+
+    <extension target="org.nuxeo.ecm.core.uidgen.UIDGeneratorService" point="sequencers">
+        <sequencer name="mleMongoSequencer" class="org.nuxeo.ecm.core.mongodb.seqgen.MongoDBUIDSequencer" />
+    </extension>
+
+</component>

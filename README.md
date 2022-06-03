@@ -15,6 +15,10 @@ nuxeo studio
 ```
 
 ## Patterns
+ 
+- Multi repositories
+- Fulltext search with storedInBlob=true (more details in https://jira.nuxeo.com/browse/NXP-26704)
+- MongoDB sequence
 
 ## Contact
 

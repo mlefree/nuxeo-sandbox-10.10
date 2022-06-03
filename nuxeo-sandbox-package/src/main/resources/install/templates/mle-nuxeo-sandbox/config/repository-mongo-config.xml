@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.ecm.core.storage.mle.mongo">
+
+    <extension target="org.nuxeo.ecm.core.blob.BlobManager" point="configuration">
+        <blobprovider name="mlemongorepo01">
+            <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+        </blobprovider>
+        <blobprovider name="mlemongorepo02">
+            <class>org.nuxeo.ecm.core.blob.binary.DefaultBinaryManager</class>
+        </blobprovider>
+    </extension>
+
+    <extension target="org.nuxeo.ecm.core.blob.DocumentBlobManager" point="configuration">
+        <blobdispatcher>
+            <class>org.nuxeo.ecm.core.blob.DefaultBlobDispatcher</class>
+            <property name="ecm:repositoryName=mlemongorepo01">mlemongorepo01</property>
+            <property name="ecm:repositoryName=mlemongorepo02">mlemongorepo02</property>
+            <property name="default">default</property>
+        </blobdispatcher>
+    </extension>
+
+    <require>org.nuxeo.runtime.mongodb.MongoDBComponent</require>
+
+    <extension target="org.nuxeo.ecm.core.storage.mongodb.MongoDBRepositoryService" point="repository">
+
+        <repository name="mlemongorepo01" label="mlemongorepo01" headless="false">
+            <server>mongodb://mongo:27017/?maxPoolSize=200</server>
+            <dbname>mlemongorepo01</dbname>
+            <!--
+            <fulltext disabled="true" searchDisabled="true"/>
+            <fulltext disabled="${nuxeo.vcs.fulltext.disabled}"
+                  storedInBlob="${nuxeo.vcs.fulltext.storedInBlob}"
+                  searchDisabled="${nuxeo.vcs.fulltext.search.disabled}" />
+            -->
+            <fulltext disabled="false"
+                      storedInBlob="true"
+                      searchDisabled="false" />
+            <cache enabled="true" maxSize="1000" concurrencyLevel="10" ttl="10"/>
+            <clustering id="" enabled="false">
+                <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
+            </clustering>
+            <changeTokenEnabled>true</changeTokenEnabled>
+        </repository>
+
+        <repository name="mlemongorepo02" label="mlemongorepo02" headless="false">
+            <server>mongodb://mongo:27017/?maxPoolSize=200</server>
+            <dbname>mlemongorepo02</dbname>
+            <fulltext disabled="false"
+                      storedInBlob="true"
+                      searchDisabled="false" />
+            <cache enabled="true" maxSize="1000" concurrencyLevel="10" ttl="10"/>
+            <clustering id="" enabled="false">
+                <invalidatorClass>org.nuxeo.ecm.core.storage.dbs.DBSPubSubInvalidator</invalidatorClass>
+            </clustering>
+            <changeTokenEnabled>true</changeTokenEnabled>
+        </repository>
+
+    </extension>
+
+    <extension target="org.nuxeo.elasticsearch.ElasticSearchComponent" point="elasticSearchIndex">
+        <elasticSearchIndex name="mle-mongo-repo01" repository="mlemongorepo01" type="doc"/>
+        <elasticSearchIndex name="mle-mongo-repo02" repository="mlemongorepo02" manageAlias="true" type="doc"/>
+    </extension>
+
+</component>
