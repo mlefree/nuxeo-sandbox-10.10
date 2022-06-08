@@ -6,8 +6,7 @@
     <extension target="org.nuxeo.runtime.LoginComponent" point="domains">
         <domain name="nuxeo-ecm-web">
 
-            <login-module code="com.mlefree.nuxeo.sandbox.login.MleLoginModule"
-                          flag="required">
+            <login-module code="com.mlefree.nuxeo.sandbox.login.MleLoginModule" flag="required">
                 <option name="principalClassName">org.nuxeo.ecm.platform.login.NuxeoPrincipal</option>
                 <option name="useUserIdentificationInfoCB">true</option>
             </login-module>
