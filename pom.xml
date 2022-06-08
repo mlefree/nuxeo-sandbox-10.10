@@ -11,13 +11,12 @@
 
     <groupId>com.mlefree.nuxeo.sandbox</groupId>
     <artifactId>nuxeo-sandbox-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
     <name>MleFree Nuxeo sandbox parent</name>
     <description/>
     <packaging>pom</packaging>
 
     <properties>
-        <!-- Skip Nuxeo enforcer rules by default -->
         <nuxeo.skip.enforcer>true</nuxeo.skip.enforcer>
         <nuxeo.target.version>10.10</nuxeo.target.version>
         <studio.project.version>10-10-SNAPSHOT</studio.project.version>
@@ -53,6 +52,11 @@
                 <artifactId>mleprevost-SANDBOX</artifactId>
                 <version>${studio.project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>3.12.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -70,7 +74,7 @@
         </repository>
         <repository>
             <id>maven-internal</id>
-            <url>https://packages.nuxeo.com/repository/maven-internal/</url>
+            <url>https://packages.nuxeo.com/repository/maven-private/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -114,7 +118,6 @@
                     <configuration>
                         <rules>
                             <requireReleaseDeps>
-                                <!-- Exclusions are tolerated for nightly "date-based" releases only -->
                                 <excludes>
                                     <exclude>nuxeo-studio:mleprevost-SANDBOX</exclude>
                                 </excludes>

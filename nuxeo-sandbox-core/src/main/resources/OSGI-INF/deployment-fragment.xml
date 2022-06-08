@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<fragment version="1">
+
+    <extension target="web#STD-AUTH-FILTER">
+
+        <filter>
+            <display-name>MleAuthenticationFilter</display-name>
+            <filter-name>MleAuthenticationFilter</filter-name>
+            <filter-class>com.mlefree.nuxeo.sandbox.login.MleAuthenticationFilter</filter-class>
+        </filter>
+
+        <filter-mapping>
+            <filter-name>MleAuthenticationFilter</filter-name>
+            <url-pattern>/ui/*</url-pattern>
+            <dispatcher>REQUEST</dispatcher>
+            <dispatcher>FORWARD</dispatcher>
+        </filter-mapping>
+
+    </extension>
+
+</fragment>

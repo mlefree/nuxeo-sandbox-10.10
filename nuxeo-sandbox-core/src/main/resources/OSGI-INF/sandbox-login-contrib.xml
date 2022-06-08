@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<component name="com.mlefree.nuxeo.sandbox.login.contrib" version="1.0">
+
+    <require>org.nuxeo.runtime.started</require>
+
+    <extension target="org.nuxeo.runtime.LoginComponent" point="domains">
+        <domain name="nuxeo-ecm-web">
+
+            <login-module code="com.mlefree.nuxeo.sandbox.login.MleLoginModule"
+                          flag="required">
+                <option name="principalClassName">org.nuxeo.ecm.platform.login.NuxeoPrincipal</option>
+                <option name="useUserIdentificationInfoCB">true</option>
+            </login-module>
+        </domain>
+
+        <!--
+        <domain name="nuxeo-system-login">
+            <login-module code="com.mlefree.nuxeo.sandbox.login.MleClientLoginModule" flag="required">
+                <option name="principalClassName">org.nuxeo.ecm.platform.login.NuxeoPrincipal</option>
+                <option name="useUserIdentificationInfoCB">true</option>
+                <option name="password-stacking">true</option>
+                <option name="restore-login-identity">true</option>
+                <option name="multi-threaded">true</option>
+            </login-module>
+        </domain>
+
+        <domain name="nuxeo-client-login">
+            <login-module code="com.mlefree.nuxeo.sandbox.login.MleClientLoginModule" flag="required">
+                <option name="password-stacking">true</option>
+                <option name="multi-threaded">true</option>
+                <option name="restore-login-identity">true</option>
+            </login-module>
+        </domain>
+
+        <domain name="nuxeo-ecm">
+         <login-module code="com.mlefree.nuxeo.sandbox.login.MleClientLoginModule" flag="required">
+
+             <option name="principalClassName">org.nuxeo.ecm.platform.login.NuxeoPrincipal</option>
+             <option name="useUserIdentificationInfoCB">true</option>
+
+             <option name="principalClassName">org.nuxeo.ecm.platform.login.NuxeoPrincipal</option>
+             <option name="useUserIdentificationInfoCB">true</option>
+             <option name="password-stacking">true</option>
+             <option name="restore-login-identity">true</option>
+             <option name="multi-threaded">true</option>
+           </login-module>
+         </domain>
+        -->
+
+    </extension>
+
+</component>

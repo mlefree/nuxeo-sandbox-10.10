@@ -18,7 +18,7 @@ import org.nuxeo.runtime.transaction.TransactionHelper;
 @Features({ PlatformFeature.class })
 @RepositoryConfig(init = MleRepositoryInit.class, cleanup = Granularity.METHOD)
 @Deploy({ "com.mlefree.nuxeo.sandbox.nuxeo-sandbox-core", "org.nuxeo.ecm.default.config",
-        "org.nuxeo.ecm.platform.usermanager" })
+        "org.nuxeo.ecm.platform.usermanager", "org.nuxeo.runtime.server"})
 @PartialDeploy(bundle = "studio.extensions.mleprevost-SANDBOX", extensions = { TargetExtensions.ContentModel.class,
         TargetExtensions.ContentTemplate.class, })
 public class MleFeature implements RunnerFeature {
