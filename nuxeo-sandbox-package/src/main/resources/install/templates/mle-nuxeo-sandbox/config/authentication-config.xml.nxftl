@@ -1,0 +1,40 @@
+<component name="org.nuxeo.login.auth">
+    <require>org.nuxeo.ecm.platform.ui.web.auth.WebEngineConfig</require>
+    <require>org.nuxeo.ecm.platform.ui.web.auth.defaultConfig</require>
+    <require>org.nuxeo.ecm.platform.ui.web.auth.service.PluggableAuthenticationService</require>
+
+    <extension
+            target="org.nuxeo.ecm.platform.ui.web.auth.service.PluggableAuthenticationService"
+            point="specificChains">
+        <specificAuthenticationChain name="Automation">
+            <urlPatterns>
+                <url>(.*)/automation.*</url>
+            </urlPatterns>
+
+            <replacementChain>
+                <plugin>BASIC_AUTH</plugin>
+                <plugin>FORM_AUTH</plugin>
+            </replacementChain>
+        </specificAuthenticationChain>
+
+        <specificAuthenticationChain name="RestAPI">
+            <urlPatterns>
+                <url>(.*)/api/v.*</url>
+            </urlPatterns>
+
+            <replacementChain>
+                <plugin>BASIC_AUTH</plugin>
+                <plugin>FORM_AUTH</plugin>
+            </replacementChain>
+        </specificAuthenticationChain>
+    </extension>
+
+    <extension target="org.nuxeo.ecm.platform.ui.web.auth.service.PluggableAuthenticationService" point="chain">
+        <authenticationChain>
+            <plugins>
+                <plugin>BASIC_AUTH</plugin>
+                <plugin>FORM_AUTH</plugin>
+            </plugins>
+        </authenticationChain>
+    </extension>
+</component>

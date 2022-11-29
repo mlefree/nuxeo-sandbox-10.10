@@ -11,7 +11,7 @@
 
     <groupId>com.mlefree.nuxeo.sandbox</groupId>
     <artifactId>nuxeo-sandbox-parent</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.10-SNAPSHOT</version>
     <name>MleFree Nuxeo sandbox parent</name>
     <description/>
     <packaging>pom</packaging>

@@ -11,7 +11,7 @@
 
         <filter-mapping>
             <filter-name>MleAuthenticationFilter</filter-name>
-            <url-pattern>/ui/*</url-pattern>
+            <url-pattern>*</url-pattern>
             <dispatcher>REQUEST</dispatcher>
             <dispatcher>FORWARD</dispatcher>
         </filter-mapping>
